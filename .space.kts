@@ -8,7 +8,7 @@ job("Build and push Docker") {
         }
 
         push("netmoor.registry.jetbrains.space/p/edu/containers/hzk-demo") {
-            tags("version1.0")
+            tags(tags("0.0.run_number"))
         }
     }
 }
