@@ -9,9 +9,9 @@ job("Build and push Docker") {
             labels["vendor"] = "netmoor"
         }
 
-        push("netmoor.jetbrains.space/p/edu/repositories/hazelcast-demo") {
+        push("netmoor.registry.jetbrains.space/p/edu/containers/hazelcast-demo") {
             // use current job run number as a tag - '0.0.run_number'
-            tags("0.0.run_number")
+            tags("0.0.\$JB_SPACE_EXECUTION_NUMBER")
             // see example on how to use branch name in a tag
         }
     }
