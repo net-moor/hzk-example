@@ -3,10 +3,6 @@
 job("Build and push Docker") {
     docker {
 
-        beforeBuildScript {
-            content = "ls -la"
-        }
-
         build {
             context = "docker"
             file = "./Dockerfile"
