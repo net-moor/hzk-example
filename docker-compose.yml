@@ -1,0 +1,7 @@
+version: "3"
+services:
+  hzk-test:
+    build: .
+    ports:
+      - "8081:8081"
+    container_name: hzk-test

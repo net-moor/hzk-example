@@ -1,0 +1,6 @@
+hazelcast:
+  instance-name: test-hzk
+  network:
+    join:
+      kubernetes:
+        enabled: true
