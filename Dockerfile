@@ -1,6 +1,6 @@
 FROM maven as package
 
-WORKDIR /opt/app
+WORKDIR /opt/app/build
 
 COPY pom.xml .
 COPY src src
@@ -13,7 +13,7 @@ ARG FINAL_NAME=app.jar
 
 WORKDIR /opt/app
 
-COPY --from=package /opt/app/target/*.jar ../app.jar
+COPY --from=package /opt/app/build/target/*.jar ../app.jar
 
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/opt/app.jar"]
