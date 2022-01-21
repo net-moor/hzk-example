@@ -2,8 +2,8 @@ FROM maven as package
 
 WORKDIR /opt/app
 
-COPY /mnt/space/work/hazelcast-demo/pom.xml .
-COPY /mnt/space/work/hazelcast-demo/src src
+COPY pom.xml .
+COPY src src
 
 RUN mvn package -DartifactName=app -Dmaven.test.skip=true
 
