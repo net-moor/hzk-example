@@ -1,7 +1,6 @@
 job("Build and push Docker") {
     docker {
         build {
-            context = "docker"
             file = "./Dockerfile"
             labels["vendor"] = "netmoor"
             args["HTTP_PROXY"] = "http://10.20.30.1:123"
