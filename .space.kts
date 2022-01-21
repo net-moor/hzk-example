@@ -3,7 +3,7 @@
 job("Build and push Docker") {
     docker {
         build {
-            context = "hazelcast-demo"
+            context = "/mnt/space/work/hazelcast-demo"
             file = "./Dockerfile"
             labels["vendor"] = "netmoor"
             args["HTTP_PROXY"] = "http://10.20.30.1:123"
