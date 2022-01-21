@@ -7,7 +7,7 @@ job("Build and push Docker") {
             args["HTTP_PROXY"] = "http://10.20.30.1:123"
         }
 
-        push("netmoor.registry.jetbrains.space/p/mp/mydocker/myimage") {
+        push("netmoor.jetbrains.space/p/edu/repositories/hazelcast-demo") {
             tags("version1.0")
         }
     }
