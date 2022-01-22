@@ -38,8 +38,13 @@ jobs:
       - name: Build and tag image
         run: |
           docker build -t "${{ steps.global_env.outputs.IMAGE_NAME }}:latest" -t "${{ steps.global_env.outputs.IMAGE_NAME }}:1.0.${{ github.run_number }}" .
-      - name: Docker login
-        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
       - name: Publish image
         env:
           IMAGE_NAME: $GITHUB_REPOSITORY
