@@ -2,6 +2,7 @@ package com.example.hzk.controller;
 
 import com.example.hzk.dto.CommandResponse;
 import com.hazelcast.core.HazelcastInstance;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +15,10 @@ import java.util.concurrent.ConcurrentMap;
  * @author Nikolay_Batov on 21.01.2022
  */
 @RestController
+@RequiredArgsConstructor
 public class CommandController {
 
-    @Autowired
-    private HazelcastInstance hazelcastInstance;
+    private final HazelcastInstance hazelcastInstance;
 
     private ConcurrentMap<String,String> retrieveMap() {
         return hazelcastInstance.getMap("map");
