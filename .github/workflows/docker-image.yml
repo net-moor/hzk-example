@@ -30,5 +30,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag hzk-example:$(date +%s)
+      - name: set global env
+        id: global_env
+        run: |
+          echo "::set-output name=IMAGE_NAME::${GITHUB_REPOSITORY#*/}"
+          echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB_REPOSITORY}/${GITHUB_REPOSITORY#*/}"
+      - name: Build and tag image
+        run: |
+          docker build . --file Dockerfile -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:${GITHUB_SHA::8}"
+      - name: Docker login
+        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
+      - name: Publish image
+        env:
+          IMAGE_NAME: $GITHUB_REPOSITORY
+        run: docker push "docker.pkg.github.com/$GITHUB_REPOSITORY/${{ steps.global_env.outputs.IMAGE_NAME }}"
