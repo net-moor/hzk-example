@@ -46,4 +46,4 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Publish image
-        run: docker push -a
+        run: docker push ${{ steps.global_env.outputs.IMAGE_NAME }} -a
