@@ -9,7 +9,6 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -24,5 +23,11 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  deploy:
+    name: Deploy app
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag hzk-example:$(date +%s)
