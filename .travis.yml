@@ -1,0 +1,23 @@
+dist: trusty
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk11
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+    # CONFIG SERVICE
+  - docker build -t hzk-example:$COMMIT ./
+  - docker tag hzk-example:$COMMIT hzk-example:$TAG
+  - docker push hzk-example
