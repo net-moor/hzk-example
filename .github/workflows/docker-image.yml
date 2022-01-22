@@ -35,9 +35,10 @@ jobs:
         run: |
           echo "::set-output name=IMAGE_NAME::${GITHUB_REPOSITORY#*/}"
           echo "::set-output name=DOCKER_TAG::1.0.${{ github.run_number }}"
+          echo "::set-output name=DOCKERHUB_IMAGE_NAME::ghcr.io/${GITHUB_REPOSITORY}/${GITHUB_REPOSITORY#*/}"
       - name: Build and tag image
         run: |
-          docker build -t "${{ steps.global_env.outputs.IMAGE_NAME }}:latest" -t "${{ steps.global_env.outputs.IMAGE_NAME }}:${{ steps.global_env.outputs.DOCKER_TAG }}" .
+          docker build -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:latest" -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:${{ steps.global_env.outputs.DOCKER_TAG }}" .
       - name: Login to Docker Hub
         run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
       - name: Publish image
