@@ -40,6 +40,8 @@ jobs:
         run: |
           docker build -t "${{ steps.global_env.outputs.IMAGE_NAME }}:latest" -t "${{ steps.global_env.outputs.IMAGE_NAME }}:${{ steps.global_env.outputs.DOCKER_TAG }}" .
       - name: Login to Docker Hub
-        run: docker login netmoor.registry.jetbrains.space -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_TOKEN}}
+        run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
       - name: Publish image
-        run: docker push netmoor.registry.jetbrains.space/p/edu/containers/${{ steps.global_env.outputs.IMAGE_NAME }}
+        env:
+          IMAGE_NAME: $GITHUB_REPOSITORY
+        run: docker push "ghcr.io/$GITHUB_REPOSITORY/${{ steps.global_env.outputs.IMAGE_NAME }}"
