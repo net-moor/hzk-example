@@ -41,4 +41,4 @@ jobs:
       - name: Login to Docker Hub
         run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{secrets.GITHUB_TOKEN}}
       - name: Publish image
-        run: docker push "ghcr.io/nikolaybatov/${{ steps.global_env.outputs.IMAGE_NAME }}"
+        run: docker push "ghcr.io/${GITHUB_REPOSITORY}/${{ steps.global_env.outputs.IMAGE_NAME }}"
