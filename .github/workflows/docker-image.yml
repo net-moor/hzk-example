@@ -19,10 +19,10 @@ jobs:
         with:
           java-version: 1.11
       - name: Maven verify
-          run: mvn -B clean verify
+        run: mvn -B clean verify
       - name: Test Coverage
-          uses: codecov/codecov-action@v1
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag hzk-example:$(date +%s)
