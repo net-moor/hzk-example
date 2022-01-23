@@ -1,37 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hazelcast-embedded
+  name: hzk-example
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: hazelcast-embedded
+      app: hzk-example
   template:
     metadata:
       labels:
-        app: hazelcast-embedded
+        app: hzk-example
     spec:
       containers:
-        - name: hazelcast-embedded
-          image: leszko/hazelcast-embedded-sample
+        - name: hzk-example
+          image: ghcr.io/net-moor/hzk-example:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5701
             - containerPort: 8080
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: hazelcast-embedded
-spec:
-  type: LoadBalancer
-  selector:
-    app: hazelcast-embedded
-  ports:
-    - name: hazelcast
-      port: 5701
-    - name: app
-      port: 8080

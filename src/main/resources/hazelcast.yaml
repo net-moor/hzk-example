@@ -1,4 +1,6 @@
 hazelcast:
+  cp-subsystem:
+    cp-member-count: 2
   instance-name: test-hzk
   network:
     join:
